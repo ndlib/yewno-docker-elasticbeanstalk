@@ -1,0 +1,11 @@
+{
+  "AWSEBDockerrunVersion": "1", 
+  "Logging": "/var/log/nginx", 
+  "Image": {
+    "Name": "jonharzler/yewno", 
+    "Update": true
+  }, 
+  "Ports": {
+    "ContainerPort": "80"
+  }
+}
