@@ -1,7 +1,9 @@
-Yewno nginx test
+# Yewno nginx docker elasticbeanstalk test
 ===
 
 ```shell
+pipenv install --ignore-pipfile && pipenv shell
+
 APPLICATION_NAME=yewno
 ENVIRONMENT=test
 VERSION_LABEL=v2018.4
