@@ -5,7 +5,9 @@
     "Name": "jonharzler/yewno", 
     "Update": true
   }, 
-  "Ports": {
+  "Ports": [
+    {
     "ContainerPort": "80"
-  }
+    }
+  ]
 }
