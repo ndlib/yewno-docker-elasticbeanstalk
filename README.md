@@ -4,7 +4,7 @@ Yewno nginx test
 ```shell
 APPLICATION_NAME=yewno
 ENVIRONMENT=test
-VERSION_LABEL=v2018.2
+VERSION_LABEL=v2018.3
 APPLICATION_VERSION_BUNDLE=${VERSION_LABEL}.zip
 
 REGION=$(aws configure get region)
