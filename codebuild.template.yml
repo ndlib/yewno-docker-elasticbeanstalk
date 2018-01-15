@@ -1,0 +1,115 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+
+
+Description: 'CodeBuild yewno-docker-elasticbeanstalk from GitHub to S3'
+
+
+Metadata:
+
+  AWS::CloudFormation::Interface:
+    ParameterLabels:
+      BuildImage: {default: Docker build container}
+      GitHubOauth: {default: GitHub OAUTH credentials}
+      LogRetention: {default: Build Log Retention}
+      RepoURL: {default: Project GitHub Repo}
+      TargetBucket: {default: Artifact Target S3 Bucket}
+    ParameterGroups:
+    - Label: {default: Application Settings}
+      Parameters:
+      - GitHubOauth
+      - RepoURL
+      - BuildImage
+    - Label: {default: CodeBuild Settings}
+      Parameters:
+      - TargetBucket
+      - LogRetention
+
+
+Outputs:
+
+  GitHubWebhook:
+    Value: !GetAtt GitHubWebhook.url
+
+  BuildLogsURL:
+    Value: !Sub https://console.aws.amazon.com/cloudwatch/home?region=${AWS::Region}#logStream:group=${LogGroup}
+
+  CodeBuildURL:
+    Value: !Sub https://console.aws.amazon.com/codebuild/home?region=${AWS::Region}#/projects/${Project}/view
+
+  RepoURL:
+    Value: !Ref RepoURL
+
+
+Parameters:
+
+  GitHubOauth:
+    Type: String
+    Description: GitHub Oauth Credential
+    NoEcho: true
+
+  RepoURL:
+    Type: String
+    Description: GitHub Repo URL
+    Default: 'https://github.com/ndlib/yewno-docker-elasticbeanstalk.git'
+
+  BuildImage:
+    Type: String
+    Description: Docker build container
+    Default: 'aws/codebuild/python:3.5.2'
+
+  TargetBucket:
+    Type: String
+    Description: versioned S3 bucket name
+    Default: testlibnd-cf
+
+  LogRetention:
+    Type: Number
+    Description: days
+    Default: 400
+    AllowedValues: [1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, 3653]
+
+
+Resources:
+
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/codebuild/${Project}
+      RetentionInDays: !Ref LogRetention
+
+  GitHubWebhook:
+    Type: Custom::GitHubWebhook
+    Version: '1.0'
+    Properties:
+      ServiceToken: !ImportValue 'Custom::GitHubWebhook'
+      Name: !Ref Project
+
+  Project:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name: !Ref 'AWS::StackName'
+      BadgeEnabled: true
+      Description: monarch_libguides from GitHub to S3
+      ServiceRole: !ImportValue 'codebuild:role'
+      TimeoutInMinutes: 5
+      Source:
+        Type: GITHUB
+        Location: !Ref RepoURL
+        Auth:
+          Type: OAUTH
+          Resource: !Ref GitHubOauth
+      Cache:
+        Type: S3
+        Location: !Sub '${TargetBucket}/cache/${AWS::StackName}'
+      Artifacts:
+        Type: S3
+        Location: !Ref TargetBucket
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: !Ref BuildImage
+        EnvironmentVariables:
+          - {Name: TARGET_BUCKET, Value: !Ref TargetBucket}
+          - {Name: APPLICATION_NAME, Value: !Ref 'AWS::StackName'}
+...

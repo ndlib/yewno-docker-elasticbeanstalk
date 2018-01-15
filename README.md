@@ -32,3 +32,15 @@ aws elasticbeanstalk create-environment \
  --solution-stack-name "64bit Amazon Linux 2017.09 v2.8.2 running Docker 17.06.2-ce"
 
 ```
+
+# With Codebuild:
+```shell
+security add-generic-password -a GitHub -s OAUTH -w '[YOUR OAUTH TOKEN]'
+
+aws cloudformation deploy \
+  --template-file codebuild.yml \
+  --stack-name yewno-docker-elasticbeanstalk-builder \
+  --parameter-overrides \
+    GitHubOauth="$(security find-generic-password -w -a GitHub -l OAUTH)" \
+  --capabilities CAPABILITY_NAMED_IAM
+```

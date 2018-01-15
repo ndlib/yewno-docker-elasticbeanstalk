@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "9327a135e70607359ef7ef212b433bce855bbd41931f276df1025963dc44e0df"
+            "sha256": "9a81c4bc9fa0c4b293470fa7a5dfaf64782a1487f249c225ebae4733e064eaf0"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -18,7 +18,7 @@
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.6"
+            "python_version": "3"
         },
         "sources": [
             {
@@ -38,24 +38,24 @@
         },
         "awscli": {
             "hashes": [
-                "sha256:a63de7f74c9732868c145d16f6ea39754e324137e346ee8c4a6520a230375a2f",
-                "sha256:e28b6eb55e38cf42444e29ebbc15c0b86841f51ddfd7c716fba1bee0d7a2d634"
+                "sha256:13d2878a9065a2e39616631f70fca717657abfc2020542e0f11440f3f320eaa4",
+                "sha256:19b314620fb4ecbcf3aef6b534797246870f6ccd90817765e5b6e441322c2e90"
             ],
-            "version": "==1.14.20"
+            "version": "==1.14.24"
         },
         "boto3": {
             "hashes": [
-                "sha256:653df9f86ca73576777f1e7ee0c55e4b5ac481412f5d8f6d6fb969fa012a0281",
-                "sha256:39897daf828e72391fc0531a20293404d67d5d9fb32415e49f4fa780ae0297ce"
+                "sha256:6ec3bc48ce7164cdeccf9325252f09ec73a64dc317cc8b0f51a97cbf61d03ce0",
+                "sha256:f1d5870a0ca4bcacaea02ca338e7761777340a56b09d2fe3c03194b84ce0cb57"
             ],
-            "version": "==1.5.10"
+            "version": "==1.5.14"
         },
         "botocore": {
             "hashes": [
-                "sha256:37a744ed1b7e2bd2d402db3f02c5b84c369f5e83194524bf05e7a14a86d157fe",
-                "sha256:004061920d3268d95e84e9db21c731820bddb7b9adfcdeb040f0aac3890de11e"
+                "sha256:adf58e6824c433b9a46aad9409f22a18a19c74f7f10ccdfff104bc201359e638",
+                "sha256:02d360797944f091fb5341a2a51810aa6f44f8b40ac66951c876555e410e5f06"
             ],
-            "version": "==1.8.24"
+            "version": "==1.8.28"
         },
         "colorama": {
             "hashes": [
