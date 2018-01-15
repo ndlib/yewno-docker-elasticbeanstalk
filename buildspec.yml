@@ -2,21 +2,6 @@
 version: '0.2'
 
 
-phases:
-  install:
-    commands:
-    - if [ -s "${CODEBUILD_SRC_DIR}/scripts/install.sh" ]; then "${CODEBUILD_SRC_DIR}/scripts/install.sh"; fi
-  pre_build:
-    commands:
-    - if [ -s "${CODEBUILD_SRC_DIR}/scripts/pre_build.sh" ]; then "${CODEBUILD_SRC_DIR}/scripts/pre_build.sh"; fi
-  build:
-    commands:
-    - if [ -s "${CODEBUILD_SRC_DIR}/scripts/build.sh" ]; then "${CODEBUILD_SRC_DIR}/scripts/build.sh"; fi
-  post_build:
-    commands:
-    - if [ -s "${CODEBUILD_SRC_DIR}/scripts/post_build.sh" ]; then "${CODEBUILD_SRC_DIR}/scripts/post_build.sh"; fi
-
-
 artifacts:
   discard-paths: true
   files:
